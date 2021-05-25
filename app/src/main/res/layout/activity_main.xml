@@ -12,58 +12,74 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <LinearLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:background="@color/teal_700"
-            android:orientation="horizontal"
-            android:weightSum="3">
+            android:gravity="center"
 
+            android:orientation="horizontal"
+            android:weightSum="3"
+           android:background="@color/teal_200"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
             <TextView
-
+                android:id="@+id/std_id"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="8dp"
                 android:layout_weight=".5"
+                android:gravity="left"
                 android:padding="8dp"
                 android:text="ID"
                 android:textColor="@color/white"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-
-                android:layout_width="wrap_content"
+                android:id="@+id/std_name"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="2"
-                android:gravity="center"
+                android:gravity="left"
+                android:maxLines="2"
                 android:padding="8dp"
                 android:text="Name"
                 android:textColor="@color/white"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/std_cgpa"
+                app:layout_constraintStart_toEndOf="@+id/std_id"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-
-                android:layout_width="wrap_content"
+                android:id="@+id/std_cgpa"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
                 android:layout_marginRight="8dp"
                 android:layout_weight=".5"
-                android:gravity="center"
+                android:gravity="left"
                 android:padding="8dp"
                 android:text="CGPA"
                 android:textColor="@color/white"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
 
-        </LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler_id"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-             />
+            android:layout_height="match_parent" />
 
     </LinearLayout>
 

@@ -1,0 +1,58 @@
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <EditText
+        android:id="@+id/std_up_Name"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginLeft="32dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginRight="32dp"
+        android:ems="10"
+        android:hint="Enter Name"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <EditText
+        android:id="@+id/std_up_cgpa"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Enter Cgpa"
+
+        app:layout_constraintEnd_toEndOf="@+id/std_up_Name"
+        app:layout_constraintStart_toStartOf="@+id/std_up_Name"
+        app:layout_constraintTop_toBottomOf="@+id/std_up_Name" />
+
+    <Button
+        android:id="@+id/update_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="36dp"
+        android:text="Update"
+        app:layout_constraintEnd_toEndOf="@+id/std_up_cgpa"
+        app:layout_constraintHorizontal_bias="0.753"
+        app:layout_constraintStart_toStartOf="@+id/std_up_cgpa"
+        app:layout_constraintTop_toBottomOf="@+id/std_up_cgpa" />
+
+    <Button
+        android:id="@+id/delete_id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Delete"
+        app:backgroundTint="#EA0606"
+        app:layout_constraintEnd_toStartOf="@+id/update_button"
+        app:layout_constraintStart_toStartOf="@+id/std_up_cgpa"
+        app:layout_constraintTop_toTopOf="@+id/update_button" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

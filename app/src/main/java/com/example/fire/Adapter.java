@@ -24,7 +24,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.MyHolder> {
     @NonNull
     @Override
     public MyHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.adapter_layout, null, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.adapter_layout, parent, false);
 
         return new MyHolder(view);
     }
@@ -57,7 +57,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.MyHolder> {
         void onListClick(Students student);
     }
 
-    public class MyHolder extends RecyclerView.ViewHolder  {
+    public class MyHolder extends RecyclerView.ViewHolder implements View.OnClickListener  {
 
         private TextView id, name, cgpa;
 
@@ -68,18 +68,15 @@ public class Adapter extends RecyclerView.Adapter<Adapter.MyHolder> {
             name = itemView.findViewById(R.id.std_name);
             cgpa = itemView.findViewById(R.id.std_cgpa);
 
-            itemView.setOnLongClickListener(new View.OnLongClickListener() {
-                @Override
-                public boolean onLongClick(View v) {
-                    listClick.onListClick(students.get(getAdapterPosition()));
-                    notifyItemChanged(getAdapterPosition());
-                    return false;
-                }
-            });
+            itemView.setOnClickListener(this);
 
 
         }
 
 
+        @Override
+        public void onClick(View v) {
+            listClick.onListClick(students.get(getAdapterPosition()));
+        }
     }
 }
