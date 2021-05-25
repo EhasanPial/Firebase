@@ -1,6 +1,9 @@
 package com.example.fire;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,29 +14,78 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.FirebaseError;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
-public class MainActivity extends AppCompatActivity {
+import java.util.List;
 
-    private FloatingActionButton floatingActionButton ;
+public class MainActivity extends AppCompatActivity implements Adapter.ListClick {
+
+    private FloatingActionButton floatingActionButton;
+    DatabaseReference databaseReference;
+    private List<Students> studentsList ;
+    private RecyclerView recyclerView ;
+    private Adapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        floatingActionButton = findViewById(R.id.floating) ;
+        floatingActionButton = findViewById(R.id.floating);
+        recyclerView = findViewById(R.id.recycler_id);
 
+        databaseReference = FirebaseDatabase.getInstance().getReference("Students");
+
+
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        adapter = new Adapter(this::onListClick) ;
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setAdapter(adapter);
+
+
+
+        loadData();
 
 
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, Students.class) ;
+                Intent intent = new Intent(MainActivity.this, Students.class);
                 startActivity(intent);
             }
         });
+
+    }
+
+    private void loadData() {
+
+        ValueEventListener valueEventListener = new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for(DataSnapshot d: snapshot.getChildren())
+                {
+                    studentsList.add(d.getValue(Students.class)) ;
+
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        };
+
+        databaseReference.addValueEventListener(valueEventListener) ;
+        adapter.setStudents(studentsList);
+    }
+
+    @Override
+    public void onListClick(Students student) {
 
     }
 }
